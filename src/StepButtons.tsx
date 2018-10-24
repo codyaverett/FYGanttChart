@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { Group } from 'reakit'
-import GanttContainer from './GanttContainer'
+import * as React from 'react';
+import { Group } from 'reakit';
+import GanttContainer from './GanttContainer';
 
 const StepButtons = () => (
     <GanttContainer>
@@ -11,6 +11,6 @@ const StepButtons = () => (
             </Group>
         )}
     </GanttContainer>
-)
+);
 
-export default StepButtons
+export default StepButtons;

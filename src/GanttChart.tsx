@@ -1,27 +1,27 @@
-import * as React from 'react'
-import { Provider, Flex } from 'reakit'
-import Measure from 'react-measure'
+import * as React from 'react';
+import { Provider, Flex } from 'reakit';
+import Measure from 'react-measure';
 
-import GanttContainer from './GanttContainer'
-import StepButtons from './StepButtons'
-import { ChartHeading, EpicHeading, MonthHeading } from './Labels'
-import { getFiscalMonthName } from './utility/index'
-import { GanttWrapper } from './styles'
+import GanttContainer from './GanttContainer';
+import StepButtons from './StepButtons';
+import { ChartHeading, EpicHeading, MonthHeading } from './Labels';
+import { getFiscalMonthName } from './utility/index';
+import { GanttWrapper } from './styles';
 
-import { Epic } from './types'
+import { Epic } from './types';
 
 interface ChartProps {
-    team: string
-    epics: Epic[]
+    team: string;
+    epics: Epic[];
 }
 
 class Chart extends React.Component<ChartProps> {
     constructor(props: ChartProps) {
-        super(props)
+        super(props);
     }
 
     render() {
-        const { team, epics } = this.props
+        const { team, epics } = this.props;
 
         return (
             <Provider devtools>
@@ -49,7 +49,7 @@ class Chart extends React.Component<ChartProps> {
                                             storeColumn(
                                                 index,
                                                 contentRect.bounds.width
-                                            )
+                                            );
                                         }}
                                     >
                                         {({ measureRef }) => (
@@ -81,8 +81,8 @@ class Chart extends React.Component<ChartProps> {
                     )}
                 </GanttContainer>
             </Provider>
-        )
+        );
     }
 }
 
-export default Chart
+export default Chart;

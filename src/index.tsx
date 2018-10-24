@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { render } from 'react-dom'
-import Gantt from './GanttChart'
+import * as React from 'react';
+import { render } from 'react-dom';
+import Gantt from './GanttChart';
 
 const App = () => (
     <Gantt
@@ -19,6 +19,6 @@ const App = () => (
             },
         ]}
     />
-)
+);
 
-render(<App />, document.getElementById('root'))
+render(<App />, document.getElementById('root'));

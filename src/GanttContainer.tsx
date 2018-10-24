@@ -1,36 +1,36 @@
-import * as React from 'react'
+import * as React from 'react';
 import {
     Container,
     ComposableContainer,
     ActionMap,
     SelectorMap,
-} from 'constate'
+} from 'constate';
 
-import { Epic } from './types'
+import { Epic } from './types';
 import {
     getQuarter,
     now,
     getQuarterMonths,
     getMonthsByQuarterAndYear,
-} from './utility/index'
+} from './utility/index';
 
 interface State {
-    quarter: number
-    year: number
-    months: [number, number, number]
-    epics: Epic[]
-    columns: number[]
+    quarter: number;
+    year: number;
+    months: [number, number, number];
+    epics: Epic[];
+    columns: number[];
 }
 
 interface Actions {
-    incrementQuarter: () => void
-    decrementQuarter: () => void
-    storeColumn: (index: number, value: number) => void
+    incrementQuarter: () => void;
+    decrementQuarter: () => void;
+    storeColumn: (index: number, value: number) => void;
 }
 
 interface Selectors {
-    getFiscalYear: () => string
-    getMonthNames: () => [number, number, number]
+    getFiscalYear: () => string;
+    getMonthNames: () => [number, number, number];
 }
 
 const initialState: State = {
@@ -39,7 +39,7 @@ const initialState: State = {
     months: getQuarterMonths(now()),
     epics: [],
     columns: [0, 0, 0],
-}
+};
 
 const actions: ActionMap<State, Actions> = {
     incrementQuarter: () => state => {
@@ -49,7 +49,7 @@ const actions: ActionMap<State, Actions> = {
                     quarter: 1,
                     year: state.year + 1,
                     months: getMonthsByQuarterAndYear(1, state.year + 1),
-                }
+                };
             default:
                 return {
                     quarter: state.quarter + 1,
@@ -57,7 +57,7 @@ const actions: ActionMap<State, Actions> = {
                         state.quarter + 1,
                         state.year
                     ),
-                }
+                };
         }
     },
     decrementQuarter: () => state => {
@@ -67,7 +67,7 @@ const actions: ActionMap<State, Actions> = {
                     quarter: 4,
                     year: state.year - 1,
                     months: getMonthsByQuarterAndYear(4, state.year - 1),
-                }
+                };
             default:
                 return {
                     quarter: state.quarter - 1,
@@ -75,26 +75,26 @@ const actions: ActionMap<State, Actions> = {
                         state.quarter - 1,
                         state.year
                     ),
-                }
+                };
         }
     },
     storeColumn: (index: number, value: number) => state => {
-        const newColumnData = state.columns
-        newColumnData[index] = value
+        const newColumnData = state.columns;
+        newColumnData[index] = value;
 
-        return { ...state, ...newColumnData }
+        return { ...state, ...newColumnData };
     },
-}
+};
 
 const selectors: SelectorMap<State, Selectors> = {
     getFiscalYear: () => state => {
-        const digits = state.year + 1
-        return `FY${digits.toString().slice(2)}` // e.g. FY19
+        const digits = state.year + 1;
+        return `FY${digits.toString().slice(2)}`; // e.g. FY19
     },
     getMonthNames: () => state => {
-        return getQuarterMonths(now())
+        return getQuarterMonths(now());
     },
-}
+};
 
 const GanttContainer: ComposableContainer<
     State,
@@ -108,6 +108,6 @@ const GanttContainer: ComposableContainer<
         selectors={selectors}
         context="GanttContainer"
     />
-)
+);
 
-export default GanttContainer
+export default GanttContainer;

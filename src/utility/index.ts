@@ -30,7 +30,7 @@ export const daysInMonth = (month: number, year: number): number => {
    Use today if no date is provided */
 export const getQuarter = (d: Date): number => {
     d = d || new Date();
-    let q = [4, 1, 2, 3];
+    const q = [4, 1, 2, 3];
     return q[Math.floor(d.getMonth() / 3)];
 };
 

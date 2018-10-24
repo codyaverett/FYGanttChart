@@ -1,13 +1,13 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Container,
   ComposableContainer,
   ActionMap,
   SelectorMap
-} from "constate";
+} from 'constate';
 
-import { Epic } from "./types";
-import { getQuarter, now, getQuarterMonths, getMonthsByQuarterAndYear } from "./utility/index";
+import { Epic } from './types';
+import { getQuarter, now, getQuarterMonths, getMonthsByQuarterAndYear } from './utility/index';
 
 interface State {
   quarter: number;
@@ -25,7 +25,7 @@ interface Actions {
 
 interface Selectors {
   getFiscalYear: () => string;
-  getMonthName: () => string;
+  getMonthNames: () => [number, number, number];
 }
 
 const initialState: State = {
@@ -68,11 +68,10 @@ const actions: ActionMap<State, Actions> = {
     }
   },
   storeColumn: (index: number, value: number) => state => {
-    return {
-      columns: Object.assign(state.columns,{
-        [index]: value
-      }}
-    }
+    const newColumnData = state.columns;
+    newColumnData[index] = value;
+
+    return { ...state, ...newColumnData };
   }
 };
 
@@ -81,7 +80,7 @@ const selectors: SelectorMap<State, Selectors> = {
     const digits = state.year + 1;
     return `FY${digits.toString().slice(2)}`; // e.g. FY19
   },
-  getMonthName: () => state => {
+  getMonthNames: () => state => {
     return getQuarterMonths(now());
   }
 };
